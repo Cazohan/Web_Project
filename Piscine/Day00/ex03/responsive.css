@@ -1,0 +1,81 @@
+
+
+h2
+{
+	font-size: 2vw;
+	text-align: center;
+}
+
+body
+{ 
+	background: url(http://4anneaux.fr/wp-content/uploads/2011/10/cubedwall.jpg) center fixed;
+}
+
+h1{color: red;
+	 text-align: center; 
+	 size: 12px; 
+	 font-style: italic; 
+	 text-decoration: underline;
+}
+
+table
+{
+	height: 100%;
+	width: 100%;
+}
+
+td
+{
+	border: 1px solid black;
+}
+
+td, p
+{
+	font-size: 0.8vw;
+	position: relative;  
+	vertical-align: middle; 
+	/*line-height: 1em;*/
+}
+
+.hidden
+{
+	background: rgba(0,0,0,0); 
+	border: none;
+}
+
+
+.number
+{
+	position: absolute;
+	bottom: 1px; 
+	left: 1px; 
+	font-weight: bold; 
+	font-family: Arial; 
+	font-size: 0.8vw;
+}
+
+.weight
+{
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	font-size: 0.8vw;
+	font-family: Arial;
+}
+
+		.borderdot{border: 2px black dotted;}
+		.borderdashed{border: 2px black dashed;}
+		.greenback{background: rgba(160,255,160,1);}
+		.redback{background: rgba(255,102,102,1);}
+		.beigeback{background: rgba(255,222,173,1);}
+		.saumonback{background: rgba(255,192,192,1);}
+		.pinkback{background: rgba(255,153,204,1);}
+		.pinkfade{background: rgba(255,153,204,0.5);}
+		.violetback{background: rgba(255,191,255,1);}
+		.saumonfade{background: rgba(255,192,192,0.5);}
+		.greyback{background: rgba(204,204,204,1);}
+		.greyfade{background: rgba(204,204,204,0.5);}
+		.yellowback{background: rgba(255,255,153,1);}
+		.cyanback{background: rgba(178,237,237,1);}
+		.weirdback{background: rgba(204,204,153,1);}
+		.wgrey{background: rgba(235,235,235,0.3);}

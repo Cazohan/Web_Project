@@ -1,0 +1,1 @@
+SELECT nom, prenom FROM db_lherbelo.fiche_personne WHERE nom LIKE '%-%' OR prenom LIKE '%-%' ORDER BY nom ASC, prenom ASC;
