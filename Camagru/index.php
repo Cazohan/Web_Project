@@ -1,5 +1,10 @@
 <?php
-	session_start();
+session_start();
 
-	include('config/database.php');
-	include('config/config.php');
+$_SESSION['login'] = "";
+$_SESSION['admin'] = 0;
+
+include('config/database.php');
+include('config/setup.php');
+header('Location: page/home.html');
+?>

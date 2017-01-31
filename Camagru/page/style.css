@@ -1,0 +1,13 @@
+html {
+	background-image: url("../res/wall.png");
+}
+
+h1.home {
+	text-align: center;
+	font-size: 5vw;
+}
+
+div.home {
+	text-align : center;
+	margin-top: 15%;
+}
