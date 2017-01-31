@@ -3,6 +3,6 @@ Web Project of 42 school
 #
 Piscine Php
 #
-Camagru
+Camagru (Instagram-like)
 #
 lherbelo
