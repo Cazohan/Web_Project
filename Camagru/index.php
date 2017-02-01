@@ -6,5 +6,5 @@ $_SESSION['admin'] = 0;
 
 include('config/database.php');
 include('config/setup.php');
-header('Location: page/home.html');
+header('Location: page/home.php');
 ?>

@@ -1,3 +1,8 @@
+@font-face {
+	font-family: 'Allura';
+	src: url('../font_family/Allura-Regular.otf');
+}
+
 html {
 	background-image: url("../res/wall.png");
 }
@@ -7,7 +12,12 @@ h1.home {
 	font-size: 5vw;
 }
 
+h1.gallery {
+	font-family: Allura;
+}
+
 div.home {
 	text-align : center;
 	margin-top: 15%;
 }
+
