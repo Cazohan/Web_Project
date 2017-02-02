@@ -9,9 +9,13 @@ try
 {
 	if ($_POST['login'] != "" && $_POST['passwd'] != "" && $_POST['submit'] =="Avada_Kedavra")
 	{
-		$requete = $dbconn->prepare("SELECT `login`, `passwd`, `admin` FROM `Users` WHERE `login` = '".$_POST['login']."'");
-		$requete->execute();
-		$result_tmp = $requete->fetchAll(PDO::FETCH_ASSOC);		
+		$req = 'SELECT `login`, `passwd`, `admin` FROM `Users` WHERE `login` = :login';
+		$stmt = $dbconn->prepare($req);
+		$stmt->bindValue(':login', $_POST['login'], PDO::PARAM_STR);
+		$stmt->execute();
+		/*$requete = $dbconn->prepare("SELECT `login`, `passwd`, `admin` FROM `Users` WHERE `login` = :login");
+		$requete->execute();*/
+		$result_tmp = $stmt->fetchAll(PDO::FETCH_ASSOC);		
 		$check = hash('whirlpool', $_POST['passwd']);
 		//echo $check."<html><br/></html>";
 		//print_r($result_tmp);

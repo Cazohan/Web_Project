@@ -4,7 +4,9 @@
 }
 
 html {
-	background-image: url("../res/wall.png");
+	background: url("../res/wall.png") no-repeat center fixed;
+	background-size: cover;
+	
 }
 
 h1.home {
@@ -21,3 +23,31 @@ div.home {
 	margin-top: 15%;
 }
 
+div.hmont {
+	border: 1px black solid;
+	height: 5vw;
+	width: 100%;
+}
+
+div.main {
+	border: 1px black solid;
+	height: 60vw;
+	width : 70%;
+}
+
+div.side{
+	border: 1px black solid;
+	height: 60vw;
+	width: 30%;
+}
+
+div.footer {
+	border: 1px black solid;
+	height: 5vw;
+	width: 100%;
+}
+
+div.center {
+	height: 100%;
+	width: 100%;
+}

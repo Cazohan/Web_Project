@@ -29,9 +29,14 @@ try
 {
 	if ($_POST['login'] != "" && $_POST['passwd'] != "" && $_POST['mail'] != "" && $_POST['go'])
 	{
+		$req = 'SELECT `login` FROM `Users` WHERE `login` = :login';
+		$stmt =  $dbconn->prepare($req);
+		$stmt->bindValue(':login', $_POST['login'], PDO::PARAM_STR);
+		$stmt->execute();
+		/*
 		$requete = $dbconn->prepare("SELECT `login` FROM `Users` WHERE `login` = '".$_POST['login']."'");
 		$requete->execute();
-		$result = $requete->fetchAll(PDO::FETCH_ASSOC);
+		$result = $requete->fetchAll(PDO::FETCH_ASSOC);*/
 		if (count($result) == 1)
 		{
 			echo "<script>alert('Pseudo indisponible');
@@ -40,8 +45,15 @@ try
 		else
 		{
 			$pass = hash('whirlpool', $_POST['passwd']);
+			$add = 'INSERT INTO `Users`(login, passwd, mail, date_creation, admin) VALUES (:login, :passwd, :mail, CURDATE(), '0')';
+			$stmt = $dbconn->prepare($add);
+			$stmt->bindValue(':login', $_POST['login'], PDO::PARAM_STR);
+			$stmt->bindValue(':passwd', $_POST['passwd'], PDO::PARAM_STR);
+			$stmt->bindValue(':mail', $_POST['mail'], PDO::PARAM_STR);
+			$stmt->execute();
+			/*
 			$add = $dbconn->prepare("INSERT INTO `Users`(login, passwd, mail, date_creation, admin) VALUES ('".$_POST['login']."', '".$pass."', '".$_POST['mail']."', CURDATE(), '0')");
-			$add->execute();
+			$add->execute();*/
 			$_SESSION['login'] = $_POST['login'];
 			$_SESSION['admin'] = 0;
 			get_mail($_POST['mail'], $_POST['login']);
