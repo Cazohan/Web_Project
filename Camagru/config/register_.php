@@ -45,10 +45,10 @@ try
 		else
 		{
 			$pass = hash('whirlpool', $_POST['passwd']);
-			$add = 'INSERT INTO `Users`(login, passwd, mail, date_creation, admin) VALUES (:login, :passwd, :mail, CURDATE(), '0')';
+			$add = 'INSERT INTO `Users`(login, passwd, mail, date_creation, admin) VALUES (:login, :passwd, :mail, CURDATE(), 0)';
 			$stmt = $dbconn->prepare($add);
 			$stmt->bindValue(':login', $_POST['login'], PDO::PARAM_STR);
-			$stmt->bindValue(':passwd', $_POST['passwd'], PDO::PARAM_STR);
+			$stmt->bindValue(':passwd', $pass, PDO::PARAM_STR);
 			$stmt->bindValue(':mail', $_POST['mail'], PDO::PARAM_STR);
 			$stmt->execute();
 			/*
