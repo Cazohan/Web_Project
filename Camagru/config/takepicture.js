@@ -51,3 +51,4 @@
 			photo.setAttribute('src', data);
 		}
 })();
+

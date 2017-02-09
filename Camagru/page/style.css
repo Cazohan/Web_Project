@@ -27,8 +27,26 @@ div.home {
 }
 
 /*gallery.php*/
+
 h1.gallery {
 	font-family: Allura;
+	text-align: center;
+	font-size: 6vw;
+}
+
+
+.button_log {
+	text-align: center;
+	width: 12vw;
+}
+
+img.co {
+	width: 5vw;
+	height: 5vw;
+}
+
+p.cur_user {
+	text-align: center;
 }
 
 /*mounting.php*/
