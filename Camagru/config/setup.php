@@ -21,9 +21,9 @@ try
 	$sql = "CREATE TABLE IF NOT EXISTS `Photo` ( 
 		`id_photo` INT(5) NOT NULL AUTO_INCREMENT , 
 		`titre` VARCHAR(245) NOT NULL , 
-		`src` TEXT NOT NULL , 
+		`src` LONGBLOB NOT NULL , 
 		`id_user` INT(5) NOT NULL , 
-		`like` INT(5) NULL , 
+		`jaime` INT(5) NULL , 
 		PRIMARY KEY (`id_photo`)) ENGINE = InnoDB";
 	$dbconn->exec($sql);
 

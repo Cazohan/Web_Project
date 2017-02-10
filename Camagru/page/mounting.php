@@ -6,6 +6,7 @@ session_start();
 		<meta charset="utf-8">
 		<title>Montage</title>
 		<link rel="stylesheet" href="style.css">
+		<script type="text/javascript" src="../config/save_png.js"></script>
 	</head>
 	
 	<body>
@@ -13,6 +14,7 @@ session_start();
 	<div class="hmont">
 	<h1>Testing Mounting</h1>
 	</div>
+	<button id="camera">Camera</button>
 	<div class="flexm">
 		<div class="main">
 		<video id="video"></video>
@@ -23,6 +25,7 @@ session_start();
 	</div>
 	<div class="apercu">
 		<img src="" id="photo" alt="photo">
+		<button id="save" onclick="save_png()">Enregistrer?</button>
 	</div>
 	<div class="footer">where</div>
 	</div>

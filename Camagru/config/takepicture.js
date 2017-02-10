@@ -6,8 +6,9 @@
 			photo = document.querySelector('#photo'),
 			sbutton = document.querySelector('#sbutton'),
 			width = 320,
-			height = 0;
-		navigator.getMedia = (navigator.getUserMedia ||
+			height = 0
+			save = document.querySelector('#save');
+			navigator.getMedia = (navigator.getUserMedia ||
 								navigator.webkitGetUserMedia ||
 								navigator.mozGetUserMedia ||
 								navigator.msGetUserMedia);
@@ -51,4 +52,6 @@
 			photo.setAttribute('src', data);
 		}
 })();
+
+
 
