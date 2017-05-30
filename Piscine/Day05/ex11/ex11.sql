@@ -1,1 +1,0 @@
-SELECT UCASE(db_lherbelo.fiche_personne.nom)'NOM', prenom, prix FROM db_lherbelo.fiche_personne, db_lherbelo.abonnement, db_lherbelo.membre WHERE fiche_personne.id_perso = membre.id_fiche_perso && abonnement.prix > 42 && abonnement.id_abo = membre.id_abo ORDER BY fiche_personne.nom ASC, fiche_personne.prenom ASC;

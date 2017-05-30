@@ -1,1 +1,0 @@
-DELETE FROM db_lherbelo.ft_table WHERE `id` <= 5;

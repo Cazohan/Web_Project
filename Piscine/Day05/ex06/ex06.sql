@@ -1,1 +1,0 @@
-SELECT `titre`, `resum` FROM db_lherbelo.film WHERE `resum` LIKE '%vincent%' ORDER BY `id_film` ASC;

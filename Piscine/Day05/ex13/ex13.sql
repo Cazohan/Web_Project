@@ -1,1 +1,0 @@
-SELECT ROUND(AVG(nbr_siege))'moyenne' FROM db_lherbelo.salle;

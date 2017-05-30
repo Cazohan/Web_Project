@@ -1,1 +1,0 @@
-SELECT count(*)`nb_court-metrage` FROM db_lherbelo.film WHERE `duree_min` <= 42;
