@@ -1,0 +1,98 @@
+@font-face {
+    font-family: 'Sketch';
+    src: url('../font-family/Sketch.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Pokemon_Hollow';
+    src: url('../font-family/Pokemon_Hollow.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Pokemon_Solid';
+    src: url('../font-family/Pokemon_Solid.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Simpsonfont';
+    src: url('../font-family/Simpsonfont.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Carolina';
+    src: url('../font-family/Carolina_Mountains.ttf') format('truetype');
+}
+
+
+body {
+	font-family: Simpsonfont;
+	background-color: rgba(0, 0, 0, 0.8);
+	/*font-size: 2.5vw;*/
+}
+
+#cont-img {
+	border: 1px black solid;
+	border-radius: 15px;
+	background-color: rgba(255, 0, 0, 0.4);
+	margin-top: 1vw;
+}
+
+h5 {
+	color: rgba(171, 199, 56, 0.8);
+	font-size: 1.2vw;`
+}
+
+h1 {
+	font-family: Simpsonfont;
+	color: rgb(246, 210, 12);
+	text-decoration: underline;
+}
+
+a:hover {
+	color: rgb(143, 207, 60);
+}
+
+a:active {
+	color: rgb(143, 207, 60);
+}
+
+a:visited {
+	color: rgb(143, 207, 60);
+}
+
+a:link {
+	color: rgb(143, 207, 60);
+}
+
+.tri_index {
+	background-color: rgba(235, 235, 235, 0.2);
+}
+
+.jumlog {
+	border-radius: 25px;
+	text-align: center;
+}
+
+.deco_log {
+	color: rgb(143, 207, 60);
+	text-decoration: underline;
+}
+
+.butnav, label {
+	color: rgb(246, 210, 12);
+}
+
+.btn, .btn:active, .btn:hover, .btn:visited, .btn:link {
+	color: rgb(238, 91, 161);
+	background-color: rgb(246, 210, 12);
+	border-color: rgb(246, 210, 12);
+}
+
+.test {
+	justify-content: center;
+}
+
+.perglet {
+	border: 1px rgb(40, 40, 40) solid !important; 
+	border-radius: 15px 15px 0px 0px !important ;
+}

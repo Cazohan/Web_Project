@@ -1,0 +1,129 @@
+<% include partial/header %>
+
+<form action="/profile" method="post">
+<div class="jumbotron">
+	<div class="row" id="trieur">
+	    <div class="col-xs-2 text-center">
+	        <label>Trié:</label>
+	    </div>
+	    <div class="col-xs-2 text-center">
+	    	<label>Default : </label>
+	    	<input type="radio" name="trieur" value="0" checked/>
+	    </div>
+	    <div class="col-xs-2 text-center">
+	    	<label>Âge : </label>
+	    	<input type="radio" name="trieur" value="1"/>
+	    </div>
+	    <div class="col-xs-2 text-center">
+	    	<label>Distance : </label>
+	    	<input type="radio" name="trieur" value="2"/>
+	    </div>
+	    <div class="col-xs-2 text-center">
+	    	<label>Popularité : </label>
+	    	<input type="radio" name="trieur" value="3"/>
+	    </div>
+	    <div class="col-xs-2 text-center">
+	    	<label>Tag : </label>
+	    	<input type="radio" name="trieur" value="4"/>
+	    </div>
+	</div>
+	<br/>
+	<legend></legend>
+	<div class="row">
+		<div class="col-xs-offset-3 col-xs-6 text-center">
+			<label>Tag en commun(s) :</label>
+			<br/><br/>
+		<% if (locals.session['interet']) { %>
+				<% var col = 0; for (var i = 0; locals.session['interet'][i]; i++) { %>
+					<input type="checkbox" name="select" value="<%= locals.session['interet'][i] %>"> <%= locals.session['interet'][i] %>
+				<% }
+			} %>
+		</div>
+	</div>
+	<br/>
+	<legend></legend>
+
+	<div class="row">
+		<div class="col-xs-offset-1 col-xs-6 text-center">
+			<label>Age mini :</label>
+			<input id="agemin" class="form-control text-center" type="number" name="age" value="18" min="18" max="80" onchange="agemax.min=value;">
+			<label>Age max: </label>
+			<input id="agemax" class="form-control text-center" type="number" name="age" value="80" min="18" max="80" onchange="agemin.max=value;">
+		</div>
+		<div class="col-xs-3">
+			<label>Popularité:</label>
+			<input id="popmin" class="text-center" type="number" name="age" value="0" min="0" max="500" onchange="popmax.min=value;">
+			<input id="popmax" class="text-center" type="number" name="age" value="1000" min="500" max="1000" onchange="popmin.max=value;">
+		</div>
+		<div class="col-xs-3 text-center">
+			<label>Distance (km): </label>
+			<input id="dist" class="text-center col-md-10 col-xs-10" type="number" name="distance" min="0" max="1000" value="200">
+		</div>
+	</div>
+	<br/>
+	<legend></legend>
+	<div class="row">
+		<div class="col-xs-offset-2 col-xs-3 text-center">
+			<label>Sexe ?</label>
+			<select id="sexe" class="form-control text-center" name="sexe" size="1">
+				<option></option>
+				<option>Homme</option>
+				<option>Femme</option>
+			</select>
+		</div>
+		<div class="col-xs-offset-2 col-xs-3 text-center">
+			<label>Orientation :</label>
+			<select id="orient" class="form-control text-center" name="sexe" size="1">
+				<option></option>
+				<option>Bi</option>
+				<option>Gay</option>
+				<option>Hetero</option>
+			</select>
+		</div>
+	</div>
+	<br/>
+	<legend></legend>
+	<div class="row">
+		<div class="col-xs-offset-4 col-xs-4 text-center">
+			<input id="search" class="btn" text-center" type="button" name="recherche" value="Applique les critères :">
+		</div>
+	</div>
+</div>
+</form>
+<div id="SearchRes">
+	
+</div>
+
+<script type="text/javascript">
+var button = document.querySelector('#search');
+
+button.addEventListener('click', function(ev) {
+	var agemin = document.querySelector('#agemin').value,
+		agemax = document.querySelector('#agemax').value,
+		sexe = document.querySelector('#sexe').value,
+		orient = document.querySelector('#orient').value,
+		dist = document.querySelector('#dist').value,
+		popmin = document.querySelector('#popmin').value,
+		popmax = document.querySelector('#popmax').value,
+		trie = document.querySelectorAll('input[type=radio]:checked')[0].value,
+		tags = document.querySelectorAll('input[type=checkbox]:checked'),
+		result = document.querySelector('#SearchRes'),
+		t = new Array(),
+		xhr = new XMLHttpRequest();
+
+	for (var i = 0; tags[i]; i++){
+		t.push(tags[i].value);
+	}
+	t = t.toString();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			result.innerHTML = xhr.responseText;
+		}
+	}
+	xhr.open("POST", "/profile", true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send('s=' + sexe + '&os=' + orient + '&amin=' + agemin + '&amax=' + agemax + '&d=' + dist + '&t=' + t + '&trie=' + trie + '&pomin=' + popmin + '&pomax=' + popmax);
+});
+</script>
+
+<% include partial/footer %>

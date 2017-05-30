@@ -1,0 +1,109 @@
+<%if (!locals.session['myinfo']) {
+	window.location.href = '/connexion'
+}else if (locals.session['myinfo']) {%>
+<br/><br/>
+<div class="container-fluid">
+	<div class="jumbotron">
+		<form action="/compte/info" method="post">
+		<div class="row">
+			<div class="col-xs-offset-3 col-xs-6 text-center">
+				<label>Login :</label>
+				<input class="form-control text-center" type="text" name="login" value="<%= locals.session['myinfo'][10]%>"/>
+			</div>
+		</div>
+		<br/>
+		<legend></legend>
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-4 text-center">
+				<label>Nom :</label>
+				<input class="form-control text-center" type="text" name="firstname" value="<%= locals.session['myinfo'][0]%>"/>
+			</div>
+			<div class="col-xs-offset-2 col-xs-4 text-center">
+				<label>Prénom :</label>
+				<input class="form-control text-center" type="text" name="lastname" value="<%= locals.session['myinfo'][1]%>"/>
+			</div>
+		</div>
+		<br/>
+		<legend></legend>
+		<div class="row">
+			<div class="col-xs-offset-3 col-xs-6 text-center">
+				<label>Mail :</label>
+				<input type="mail" name="mail" class="form-control text-center" value="<%= locals.session['myinfo'][6]%>"/>
+			</div>
+		</div>
+		<br/>
+		<legend></legend>
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-4 text-center">
+				<label>Sexe :</label>
+				<select class="form-control text-center" name="sexe" size="1">
+					<option><%= locals.session['myinfo'][3]%></option>
+					<%
+						if (locals.session['myinfo'][3] == 'Homme') {%>
+							<option>Femme</option>
+					<%
+						} else {%>
+							<option>Homme</option>
+					<%
+						}
+					%>
+				</select>
+			</div>
+			<div class="col-xs-offset-2 col-xs-4 text-center">
+				<label>Âge :</label>
+				<input class="form-control text-center" type="number" min="18" max="99" name="age" value="<%= locals.session['myinfo'][2]%>" />
+			</div>
+		</div>
+		<br/>
+		<legend></legend>
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-2 text-center">
+				<label>Orientation :</label>
+				<select class="form-control text-center" name="ori" size="1">
+					<option><%=locals.session['myinfo'][4]%></option>
+					<%
+						if (locals.session['myinfo'][4] == 'Hetero') {%>
+							<option>Gay</option>
+							<option>Bi</option>
+					<%} else if (locals.session['myinfo'][4] == 'Bi') {%>
+							<option>Hetero</option>
+							<option>Gay</option>
+					<%} else {%>
+							<option>Bi</option>
+							<option>Hetero</option>
+					<%}%>
+				</select>
+			</div>
+
+			<div class="col-xs-offset-1 col-xs-4 text-center">
+				<label>Ville :</label>
+				<input type="text" class="form-control text-center" name="ville" value="<%=locals.session['myinfo'][15]%>"/>
+			</div>
+			<div class="col-xs-offset-1 col-xs-3 text-center">
+				<label>Distance de vous :</label>
+				<input type="number" name="rayon" min="5" max="1000" value="<%= locals.session['myinfo'][13]%>">
+			</div>
+		</div>
+		<br/>
+		<legend></legend>
+		<div class="row">
+			<div class="col-xs-offset-2 col-xs-8 text-center">
+				<label>Présentation :</label>
+				<textarea type="text" class="form-control" name="bio" rows="5" value=""><%=locals.session['myinfo'][5]%></textarea>
+			</div>
+		</div>
+		<br/>
+		<legend></legend>
+		<div class="row">
+			<div class="col-xs-offset-5 col-xs-2">
+				<input type="submit" class="btn" name="submit" value="M.a.J"/>
+			</div>
+		</div>
+		</form>
+	</div>
+</div>
+
+<%} else {%>
+	alert('T\'oh ! T\'est déco !');
+	window.location.href = '/login';
+	<%}%>

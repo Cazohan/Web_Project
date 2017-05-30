@@ -1,0 +1,109 @@
+<% include partial/header %>
+
+<% // console.log(user); %>
+
+<div class="form-horizontal jumbotron text-center">
+	<form action="/images" method="POST" enctype="multipart/form-data">
+		<legend><%= translate.avatar %></legend>
+		<img src="<%= user.avatar %>"><br><br>
+        <label class="btn btn-primary btn-sm" for="mainPic-selector">
+            <input id="mainPic-selector" name="pic" accept="image/png,image/jpeg,image/jpg" type="file" style="display:none;">
+            Select
+        </label>
+        <span id="filename"></span>
+        <label class="btn btn-primary btn-sm" for="mainPic-validator">
+            <input id="mainPic-validator" type="submit" value="Upload" name="submit" style="display:none;">
+            Upload
+        </label>
+    </form>
+	<form class="form-horizontal jumbotron" action="/update" method="post">
+		<fieldset>
+			<legend><%= translate.account %></legend>
+				<div class="form-group">
+					<label for="inputUser" class="col-lg-2 control-label"><%= translate.username %></label>
+					<div class="col-lg-8">
+						<input type="text" class="text-center form-control" id="inputUser" value="<%= user.login %>" name="login">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputFname" class="col-lg-2 control-label"><%= translate.fname %></label>
+					<div class="col-lg-8">
+						<input type="text" class="text-center form-control" id="inputFname" value="<%= user.fname %>" name="fname">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputLname" class="col-lg-2 control-label"><%= translate.lname %></label>
+					<div class="col-lg-8">
+						<input type="text" class="text-center form-control" id="inputLname" value="<%= user.lname %>" name="lname">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputmail" class="col-lg-2 control-label"><%= translate.mailddr %></label>
+					<div class="col-lg-8">
+						<input type="text" class="text-center form-control" id="inputLname" value="<%= user.mail %>" name="mail">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="inputPassword" class="col-lg-2 control-label"><%= translate.movie %></label><br/>
+					<div class="col-xs-offset-4 col-xs-4 col-lg-offset-2 col-lg-4" style="border: 1px rgb(221, 221, 221) solid; border-radius: 15px; overflow: auto; height: 200px;">
+						<% if (user.movies) { %> 
+							<% user.movies.forEach((elem) => { %>
+									<p class="col-xs-6"><%= elem %><legend></legend></p>
+							<% }) %>
+						<% } %>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="select" class="col-lg-offset-1 col-lg-2 control-label"><%= translate.skin %></label>
+					<div class="col-lg-2">
+						<select class="form-control text-center" id="select" name="theme">
+							<option><%= user.theme %></option>
+							<option>Cerulean</option>
+							<option>Cosmo</option>
+							<option>Cyborg</option>
+							<option>Darkly</option>
+							<option>Flatly</option>
+							<option>Journal</option>
+							<option>Lumen</option>
+							<option>Paper</option>
+							<option>Readable</option>
+							<option>Sandstone</option>
+							<option>Simplex</option>
+							<option>Slate</option>
+							<option>Solar</option>
+							<option>Spacelab</option>
+							<option>Superhero</option>
+							<option>United</option>
+							<option>Yeti</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="select" class="col-lg-2 control-label"><%= translate.lang %></label>
+						<div class="col-lg-2">
+						<select class="form-control text-center" id="lang" name="lang">
+							<option><%= user.lang %></option>
+							<% if (user.lang != "EN") { %>
+								<option>EN</option>
+							<% } else if (user.lang != "FR") { %>
+								<option>FR</option>
+							<% } %>
+						</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-12">
+						<button type="submit" class="btn btn-primary"><%= translate.submit %></button>
+						<button type="reset" class="btn btn-default"><%= translate.cancel %></button>
+					</div>
+				</div>
+		</fieldset>
+	</form>
+</div>
+<script type="text/javascript">
+	$('#mainPic-selector').change(function(){
+	$('#filename').html($(this).val().split('\\').pop());
+});
+</script>
+<% include partial/footer %>

@@ -1,0 +1,87 @@
+<% include partial/header %>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+	<form class="form-horizontal jumbotron" action="/register" method="post">
+		<fieldset>
+			<legend><%= translate.register %></legend>
+				<div class="form-group">
+					<label for="inputEmail" class="col-lg-2 control-label"><%= translate.email %></label>
+					<div class="col-lg-8">
+						<input type="email" class="text-center form-control" id="inputEmail" placeholder="<%= translate.email %>" name="mail">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputUser" class="col-lg-2 control-label"><%= translate.username %></label>
+					<div class="col-lg-8">
+						<input type="text" class="text-center form-control" id="inputUser" placeholder="<%= translate.username %>" name="login">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputAvatar" class="col-xs-2 control-label"><%= translate.avatar %></label>
+						<div class="col-xs-offset-2 col-xs-1 col-sm-2 col-lg-3 text-center">
+							<input type="radio" name="avatar" value="avatarH">
+							<img class="maxsize img-circle col-xs-9 col-sm-8 col-md-7 col-lg-6 text-center " src="/asset/upload/avatarH.png">
+						</div>
+						<div class="col-xs-1 col-sm-2 col-lg-3 text-center">
+							<input type="radio" name="avatar" value="avatarF">
+							<img class="maxsize img-circle col-xs-9 col-sm-8 col-md-7 col-lg-6 text-center " src="/asset/upload/avatarF.png">
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="inputFname" class="col-lg-2 control-label"><%= translate.fname %></label>
+					<div class="col-lg-8">
+						<input type="text" class="text-center form-control" id="inputFname" placeholder="<%= translate.fname %>" name="fname">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputLname" class="col-lg-2 control-label"><%= translate.lname %></label>
+					<div class="col-lg-8">
+						<input type="text" class="text-center form-control" id="inputLname" placeholder="<%= translate.lname %>" name="lname">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword" class="col-lg-2 control-label"><%= translate.pwd %></label>
+					<div class="col-lg-8">
+						<input type="password" class="text-center form-control" id="inputPassword" placeholder="<%= translate.pwd %>" name="pwd">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword2" class="col-lg-2 control-label"><%= translate.pwd %></label>
+					<div class="col-lg-8">
+						<input type="password" class="text-center form-control" id="inputPassword2" placeholder="<%= translate.pwd %>" name="pwd2">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-12">
+						<button type="submit" class="btn btn-primary"><%= translate.submit %></button>
+						<button type="reset" class="btn btn-default"><%= translate.cancel %></button>
+					</div>
+				</div>
+		</fieldset>
+		<br/>
+		<div class="row text-center">
+			<div class="col-xs-offset-3 col-xs-3">
+				<a href="/auth/facebook">
+					<button type="submit" class="btn btn-primary"><%= translate.face %></button>
+				</a>
+			</div>
+			<div class="col-xs-3">
+				<a href="/auth/forty">
+					<button type="submit" class="btn btn-primary"><%= translate.fourty %></button>
+				</a>
+			</div>
+			<!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">
+				<a href="/auth/twitter">
+					<button type="submit" class="btn btn-primary"><%= translate.twitter %></button>
+				</a>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">
+				<a href="/auth/github">
+					<button type="submit" class="btn btn-primary"><%= translate.github %></button>
+				</a>
+			</div> -->
+		</div>
+	</form>
+</div>
+
+<% include partial/footer %>

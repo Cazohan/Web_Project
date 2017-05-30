@@ -1,0 +1,46 @@
+<% include partial/header %>
+<div class="row tri_index text-center">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <input type="submit" name="bt0" id="bt0" class="btn" value="Par Défault">
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <input type="submit" name="bt1" class="btn" id="bt1" value="Par Age"/>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <input type="submit" name="bt2" class="btn" id="bt2" value="Par Distance"/>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <input type="submit" name="bt3" class="btn" id="bt3" value="Par Popularité"/>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <input type="submit" class="btn" id="bt4" name="bt4" value="Par Tag"/>
+        </div>
+</div>
+<% if (locals.session['login'] != undefined) {
+    for (var i = 0; locals.session['allprof'][i]; i++) { %>
+        <div class="col-xs-offset-2 col-md-offset-2 col-xs-3 col-md-3">
+        <a href="/profile/<%= locals.session['allprof'][i][3] %>">
+                <div class="col-md-12 col-xs-12" id="cont-img">
+                    <img class="col-md-6 col-xs-6 img-circle" style="background-color: green;" src="<% if (locals.session['allprof'][i][0] != null) { %><%= '/asset/uploads/' + locals.session['allprof'][i][0] %><% } %>">
+                    <div class="col-md-6 col-xs-6">
+                        <h5 class="text-center"><%= locals.session['allprof'][i][1] %></h5><br/>
+                        <h5 class="text-center"><%= locals.session['allprof'][i][5] %> ans</h5><br/>
+                        <h5 class="text-center" style="text-decoration: underline"><%= locals.session['allprof'][i][2]%>km de vous</h5>
+                    </div>
+                </div>
+        </a>
+            </div>       
+    <% } 
+} else { %>
+    <div class="col-md-4 col-md-offset-4">
+        <a href="/register"><h2 class="text-center">Inscrit-toi !</h2></a>
+    </div>
+<% } %>
+</div>
+</div>
+
+<script type="text/javascript" src="/asset/js/index.js"></script>
+
+<% include partial/footer %>

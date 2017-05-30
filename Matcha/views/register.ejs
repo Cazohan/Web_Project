@@ -1,0 +1,72 @@
+<% include partial/header %>
+<div class="row">
+	<div class="col-xs-offset-3 col-xs-6 text-center">
+		<h1>Inscription :</h1>
+	</div>
+</div>
+	<br/><br/>
+<div class="jumbotron jumlog col-xs-offset-1 col-xs-10 text-center">
+	<form action="/register" method="post">
+		<div class="row">
+			<div class="col-xs-offset-2 col-xs-4 text-center">
+				<label>Nom :</label>
+				<input type="text" class="text-center form-control" name="lastname"/>
+			</div>
+			<div class="col-xs-4 text-center">
+				<label>Prénom :</label>
+				<input type="text" class="text-center form-control" name="firstname"/>
+			</div>
+		</div>
+		<br/>
+		<legend></legend>
+		<div class="row">
+			<div class="col-xs-offset-4 col-xs-4 text-center">
+				<label>Vous êtes :</label>
+				<select class="form-control text-center input-sm" name="sexe" size="1">
+					<option>Homme</option>
+					<option>Femme</option>
+				</select>
+			</div>
+		</div>
+		<br/>
+		<legend></legend>
+		<div class="row">
+			<div class="col-xs-offset-3 col-xs-6">
+				<label>Login :</label>
+				<input type="text" name="login" class="form-control text-center"/>
+			</div>
+		</div>
+		<br/>
+		<legend></legend>
+		<div class="row">
+			<div class="col-xs-offset-2 col-xs-4 text-center">
+				<label>Mot de passe :</label>
+				<input type="password" name="pwd" class="form-control text-center" pattern=".{5,}" required title="5 caractères minimums. Inclus une Maj et un chiffre"/> 
+			</div>
+			<div class="col-xs-4 text-center">
+				<label>Confirmation :</label>
+				<input type="password" name="cfpwd" class="form-control text-center" pattern=".{5,}" required title="Même mot de passe que précedemment" />
+			</div>
+		</div>
+		<br/>
+		<legend></legend>
+		<div class="row">
+			<div class="col-xs-offset-3 col-xs-6">
+				<label>Mail :</label>
+				<input type="email" name="mail" class="form-control text-center"/>
+			</div>
+		</div>
+		<br/>
+		<legend></legend>
+		<div class="row">
+			<div class="col-xs-offset-5 col-xs-2">
+				<input type="submit" name="submit" class="btn" value="Inscription"/>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="row">
+	<div class="col-xs-offset-3 col-xs-6 text-center">
+		<a class="btn" href="/login">Déja Inscrit?</a>
+	</div>
+</div>

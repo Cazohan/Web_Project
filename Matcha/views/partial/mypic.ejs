@@ -1,0 +1,126 @@
+<% include ../partial/header%>
+	
+<div class="row">
+	<ul class="nav nav-tabs">
+	  
+	  <li class="infotabs col-xs-offset-1"><a class="perglet" href="#" id="perso" value="perso">Perso</a></li>
+	  
+	  		<li><button type="submit" name="inv" value="vide" style="visibility: hidden"></button></li>
+	  
+	  <li class="infotabs"><a href="#" id="interet" class="perglet" value="interet">Intêret</a></li>
+	  
+			  <li><button type="submit" name="inv" value="vide" style="visibility: hidden"></button></li>
+	  
+	  <li class="infotabs"><a href="" id="photos" class="perglet" value="photos">Photos</a></li>
+
+	</ul>
+</div>
+<div id="test">
+<br/>
+	<div class="row">
+		<div id="galinfo" class="text-center">
+			<% if (locals.session['mypic'][0] === '' || locals.session['mypic'][0] == null) { %>
+				<label>Aucune photo(s) a afficher</label><br>
+			<% } else { %>
+				<label>T'es photo(s) :</label><br/><br/>
+				<% for (var i = 0;locals.session['mypic'][i]; i++) { %>
+					<div>
+						<img class="col-xs-3 img-responsive" src="<%= '/asset/uploads/' + locals.session['mypic'][i] %>" onclick="toAvatar('<%= locals.session['mypic'][i] %>', 0);" oncontextmenu="deleteImg('<%= locals.session['mypic'][i] %>');return false;"/>
+					</div>
+				<% } %>
+			<% } %>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<legend></legend>
+	<div class="row">
+		<div class="col-xs-offset-4 col-xs-4 text-center">
+			<label>Choisis ta photo :</label>
+		</div>
+		<br/>
+		<br/>
+		<div class="col-xs-offset-4 col-xs-6">
+			<input type="file" class="btn" name="userPhoto" />
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div class="row">
+		<div class="col-xs-offset-4 col-xs-4 text-center">
+			<label>Ajoute la :</label><br/>
+			<input id="Upload" class="btn" type="submit" name="submit" value="Upload"/>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<div class="row">
+	<div class="col-xs-1" style="display: none;">
+		<input id="avatar_sub" type="text" name="avatar" value="<%= locals.session['myinfo'][9] %>">
+	</div>
+	</div>
+	<script type="text/javascript" src="/asset/js/mypic.js"></script>
+</div>
+
+<% include ../partial/footer%>
+
+
+<script>
+	var perso = document.getElementById('perso');
+	var interet = document.getElementById('interet');
+	var photos = document.getElementById('photos');
+	var glob = 'nothing';
+
+
+	perso.addEventListener('click', function(e) {
+		perso.setAttribute('class', 'active');
+		interet.removeAttribute('class');
+		photos.removeAttribute('class');
+		var xhr = new XMLHttpRequest(),
+			ladiv = document.getElementById('test');
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+				ladiv.innerHTML = xhr.responseText;
+			}
+		}
+		xhr.open("get", "/compte/info/perso", true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(null);
+		
+	});
+
+	interet.addEventListener('click', function(e) {
+		interet.setAttribute('class', 'active');
+		perso.removeAttribute('class');
+		photos.removeAttribute('class');
+		var xhr = new XMLHttpRequest(),
+			ladiv = document.getElementById('test');
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+				ladiv.innerHTML = xhr.responseText;
+			}
+		}
+		xhr.open("get", "/compte/info/interet", true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(null);
+	});
+
+	photos.addEventListener('click', function(e) {
+		photos.setAttribute('class', 'active');
+		interet.removeAttribute('class');
+		perso.removeAttribute('class');
+		var xhr = new XMLHttpRequest(),
+			ladiv = document.getElementById('test');
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+				ladiv.innerHTML = xhr.responseText;
+			}
+		}
+		xhr.open("get", "/compte/info/photos", true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(null);
+	})	
+</script>

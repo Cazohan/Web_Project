@@ -1,0 +1,125 @@
+<% include partial/header %>
+<% if (typeof result !== 'undefined' && typeof result[0] !== 'undefined' && typeof result[0].title !== 'undefined') { %>
+<input id="result" value="<%= result[0].title %>" hidden></input>
+<% } %>
+<% if (typeof selected !== 'undefined') {
+	if (typeof selected.genres != 'string') {
+	for (genre of selected.genres) { %>
+<input class="genre" value="<%= genre %>" hidden></input>
+<%}
+ } else { %>
+<input class="genre" value="<%= selected.genres %>" hidden></input>
+<% } %> 
+<input id="sch" value="<%= selected.sch %>" hidden></input>
+<input id="rateMin" value="<%= selected.rateMin %>" hidden></input>
+<input id="rateMax" value="<%= selected.rateMax %>" hidden></input>
+<input id="yearMin" value="<%= selected.yearMin %>" hidden></input>
+<input id="yearMax" value="<%= selected.yearMax %>" hidden></input>
+<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 text-center">
+<% } %>
+	<form action="/search" method="post">
+		<div class="col-xs-12 col-lg-12 col-md-12 col-sm-12 text-center">
+
+			<label for="rate"><%= translate.rate %></label>
+			<div class="rate">
+				<input class="col-xs-6 col-md-6 col-sm-6 col-lg-6 text-center" type="number" name="rateMin" value="<%= selected.rateMin %>" min="0" max="10">
+				<input class="col-xs-6 col-md-6 col-sm-6 col-lg-6 text-center" type="number" name="rateMax" value="<%= selected.rateMax %>" min="0" max="10">
+			</div>
+			<br>
+			<label for="year"><%= translate.year %></label>
+			<div id="year">
+				<input class="col-xs-6 col-md-6 col-sm-6 col-lg-6 text-center" type="number" name="yearMin" min="<%= Ymin %>" max="<%= Ymax %>" value="<%= selected.yearMin %>">
+				<input class="col-xs-6 col-md-6 col-sm-6 col-lg-6 text-center" type="number" name="yearMax" min="<%= Ymin %>" max="<%= Ymax %>" value="<%= selected.yearMax %>">
+			</div>
+		</div>
+		<% var indent = 0; for (var i = 0; genres[i]; i++) { %>
+			
+			<label for="<%= i + genres %>"><%= genres[i] %></label>
+			<% if (typeof selected.genres[0] !== 'undefined' && selected.genres.indexOf(genres[i]) > -1) { %>
+			<input id="<%= i + genres %>" type="checkbox" name="genre" value="<%= genres[i] %>" checked>
+			<% } else { %>
+			<input id="<%= i + genres %>" type="checkbox" name="genre" value="<%= genres[i] %>">
+			<% } %>
+			<% indent++; %>
+		<% } %>
+		<input type="submit" name="submit" value="<%= translate.apply %>">
+	</form>
+</div>
+<div id="biblio" >
+	
+</div>
+
+<script type="text/javascript">
+	var page = 1;
+	var rdy = true;
+	if(typeof $('.genre') === 'array')
+		var genre = $('.genre').map(function () { return $(this).val(); }).get();
+	else
+		var genre = $('.genre').val();
+	var rateMin = $('#rateMin').val();
+	var rateMax = $('#rateMax').val();
+	var yearMin = $('#yearMin').val();
+	var yearMax = $('#yearMax').val();
+	var result = $('#result').val();
+
+	function makeTulle(elem) {
+		var div = document.createElement('div'),
+			img = document.createElement('img'),
+			link = document.createElement('a'),
+			sco = document.createElement('span'),
+			lab = document.createElement('label');
+
+		link.setAttribute('class', 'col-lg-3 col-sm-6 col-xs-6 col-md-3 text-center')
+		link.setAttribute('href', 'video/' + elem['imdb_id']);
+		sco.innerText = elem['rate'];
+		sco.setAttribute('style', 'position:absolute;top:4px;left:0px;');
+		sco.setAttribute('class', 'stars');
+		img.setAttribute('class', 'col-lg-12 col-sm-12 col-xs-12 col-md-12');
+		img.setAttribute('src', elem['cover']);
+		if (elem.seen)
+			img.setAttribute('style', 'opacity:0.5;');
+		lab.setAttribute('class', 'text-center');
+		lab.innerText = elem['title'] + " : " + elem['year'];
+		div.appendChild(sco);
+		div.appendChild(img);
+		div.appendChild(lab);
+		link.appendChild(div);
+		biblio.appendChild(link);
+	};
+
+	var xhr = new XMLHttpRequest(),
+		biblio = document.getElementById('biblio');
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+			if (xhr.responseText == '') {
+				rdy = false;
+				return;
+			}
+			let data = JSON.parse(xhr.responseText);
+			data.forEach(elem => {
+				makeTulle(elem);
+			});
+	 	}
+	}
+	function requestPage(page) {
+		xhr.open("post", "/bibliosearch", true);
+		xhr.setRequestHeader("Content-Type", "application/json");
+		xhr.send(JSON.stringify({ page: page, genre: genre, yearMin: yearMin, yearMax: yearMax, rateMin: rateMin, rateMax: rateMax, result:result }));
+	}
+	$(document).ready(function(){
+		requestPage(page);
+			page++;
+	})
+	$(window).scroll(function(){
+		if (!rdy) return;
+		if (window.innerHeight + $(window).scrollTop()== $(document).height()) {
+			rdy = false;
+			requestPage(page);
+			page++;
+			rdy = true;
+		}
+	});
+</script>
+
+<% include partial/footer %>

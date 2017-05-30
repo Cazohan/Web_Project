@@ -1,0 +1,41 @@
+<% include partial/header %>
+<br/><br/>
+<div class="container-fluid">
+	<div class="jumbotron col-xs-offset-2 col-xs-8">
+		<div class="row text-center">
+			<legend><%= translate.change_pwd%></legend>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-xs-offset-3 col-xs-6 text-center">
+				<label class="control-label"><%= translate.pwd + " :"%></label>
+				<input type="password" value="" id="pwd" class="form-control text-center" name="pwd"/>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-xs-offset-3 col-xs-6 text-center">
+				<label class="control-label"><%= translate.cfpwd + " :"%></label>
+				<input type="password" value="" id="cfpwd" class="form-control text-center" name="cfpwd"/>
+			</div>
+		</div>
+		<br/>
+		<div class="row text-center">
+			<input type="submit" name="submit" id="change" class="btn btn-primary" value="Change"/>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('#change').click(function() {
+		var token = (location.pathname+location.search).substr(1);
+		$.post("http://localhost:3000/"+token, {pwd: $("#pwd").val(), cfpwd: $("#cfpwd").val()}, function(ret) {
+			if (ret === 'OK') {
+				alert('<%=translate.ch_pass%>');
+				window.location.href = '/login';
+			}
+		});
+	})
+</script>
+
+<% include partial/footer %>

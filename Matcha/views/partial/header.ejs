@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matcha</title>
+    <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="/asset/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/asset/bootstrap/js/bootstrap-slider.min.js"></script>
+    <script type="text/javascript" src="/asset/js/socket.io.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/asset/bootstrap/css/bootstrap-slider.min.css">
+    <link rel='stylesheet' href='https://bootswatch.com/cyborg/bootstrap.css'/>
+    <link rel="stylesheet" type="text/css" href="/asset/stylesheets/perstyle.css"/>
+    <link rel="icon" type="image/png" href="/asset/uploads/favicone.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body
+        {
+            height: 100%;
+            overflow: none;
+        }
+        .main.container
+        {
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><span class="butnav"> Matcha</span></a>
+            </div>
+            <% if (locals.session['tchat_with']) { %>
+                <div id="correspond" style="display: none;"><%= locals.session['tchat_with'] %></div>
+            <% } %>
+            <div id="userName" style="display: none;"><%= locals.session['myId'] %></div>
+            <script type="text/javascript">
+                var sock = io.connect('http://localhost:3000'),
+                    log = document.querySelector('#userName').innerText;
+
+                if (log != '' || log != undefined) {
+                    sock.emit('stayco', {login: log});
+                }
+                function downNotif(notif) {
+                    sock.emit('downNotif', {notif: notif, login: log});
+                }
+                document.getElementById('userName').addEventListener('click', function(ev) {
+                    sock.emit('test');
+                });
+            </script>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <form method="POST" action="/profile" class="navbar-form navbar-left" role="search">
+                        <input class="form-control" style="display: none;" placeholder="Pseudo" type="text" name="search">
+                    <button type="submit" class="btn">Recherche</button>
+                </form>
+                
+                <ul class="nav navbar-nav navbar-right">
+            <% if (!locals.session['login']) { %>
+                    <li><a href="/login"><span class="butnav">Connexion</span></a></li>
+            <% } else { %>
+                        <li class="dropdown">
+                            <a href="#" id="tchatblock" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="butnav">Tchat <span class="caret"></span></span></a>
+                            <ul id="tchat_drop" class="dropdown-menu" role="menu">
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" id="notifblock" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="butnav">Notif <span class="caret"></span></span></a>
+                            <ul id="notif_drop" class="dropdown-menu" role="menu">
+                            </ul>
+                        </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle butnav" data-toggle="dropdown" role="button" aria-expanded="false"><span class="butnav">Mon compte <span class="caret"></span></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/compte/profile"><span class="butnav">Mon profile</a></span></li>
+                            <li class="divider"></li>
+                            <li><a href="/compte/info"><span class="butnav">Mes infos</a></span></li>
+                        </ul>
+                            <li><a href="/delog"><span class="butnav">Déconnexion</a></span></li>
+                    </li>
+            <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <% if(locals.flash && locals.flash.error) { %>
+        <div class="alert alert-dismissible alert-warning">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash.error %>
+        </div>
+    <% } %>
+    <% if(locals.flash && locals.flash.mess) { %>
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= flash.mess %>
+        </div>
+    <% } %>
+    <div class="container-fluid">

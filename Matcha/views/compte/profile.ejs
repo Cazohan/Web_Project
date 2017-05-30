@@ -1,0 +1,88 @@
+<% include ../partial/header %>
+
+<% if (locals.session['myinfo']) { %>
+	<div class="row">
+		<div class="col-xs-12 text-center">
+			<img id="avatar" src=<%= '/asset/uploads/' + locals.session['myinfo'][9] %> class="col-xs-offset-4 col-xs-4 img-circle" alt="<%= locals.session['myinfo'][12] %>">
+		</div>
+	</div>
+	<br/>
+
+<div class="jumbotron">
+	<div class="row">
+		<div class="col-xs-offset-3 col-xs-6 text-center">
+			<p class="text-center"><%= locals.session['myinfo'][0] %> <%= locals.session['myinfo'][1] %> <% if (locals.session['myinfo'][2] != undefined) {%><%= locals.session['myinfo'][2] + ' ans'%> <% } %> </p>
+			<p class="text-center"><%= locals.session['myinfo'][3] %> <%= locals.session['myinfo'][4] %></p>
+		</div>
+	</div>
+	<br/>
+	<legend></legend>
+	<div class="row">
+		<div class="col-xs-offset-3 col-xs-6 text-center">
+			<label>Tes tags :</label>
+			<% if (locals.session['mytag'] != null) { %>
+				<p class="text-center">
+				<% for (var i = 0; locals.session['mytag'][i]; i++) { %>
+					<% if (locals.session['mytag'][i] != ' ') { %>
+						<%= '#' + locals.session['mytag'][i] %>
+					<% } %>
+				<% } %>
+				</p>
+			<% } %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-offset-3 col-xs-6 text-center">
+			<label>Popularité:</label><p><%=locals.session['popu']%> points</p>
+		</div>
+	</div>
+	<br/>
+	<legend></legend>
+	<div class="row">
+		<div class="col-xs-offset-3 col-xs-6 text-center">
+			<label>Ta bio :</label>
+			<p class="text-center"><%= locals.session['myinfo'][5] %></p>
+		</div>
+	</div>
+	<br/>
+	<legend></legend>
+	<div class="row">
+	<div id="visiteur" class="col-xs-offset-1 col-xs-4 text-center">
+	<label>Ils ont visité ton profile:</label><br/>
+		
+			<% if (locals.session['myVisit']) { %>
+				<% for (var v = 0; locals.session['myVisit'][v]; v++) { %>
+						<a href=<%= '/profile/' + locals.session['myVisit'][v] %>><%= locals.session['myVisit'][v] %></a>
+				<% } %>
+			<% } %>
+		</div>
+		<div  class="col-xs-offset-2 col-xs-3 text-center">
+			<label id="likeur">Tes like :</label>
+		</div>
+
+	</div>
+
+</div>
+
+
+	<div class="row">
+		<div class="col-xs-offset-2 col-xs-8 text-center">
+			<label>Autres photo(s) :</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 text-center">
+			<% if (locals.session['mypic']) { %>
+				<% if (locals.session['mypic'][0] != ' ') { %>
+					<% for (var i = 0; locals.session['mypic'][i]; i++) { %>
+						<img src=<%= '/asset/uploads/' + locals.session['mypic'][i] %> class="col-xs-3 img-circle text-center"/>
+					<% } %>
+				<% } %>
+			<% } %>
+		<% } %>
+		</div>
+	</div>
+
+<script type="text/javascript" src="/asset/js/profile.js"></script>
+
+<% include ../partial/footer %>

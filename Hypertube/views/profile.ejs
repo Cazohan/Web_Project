@@ -1,0 +1,66 @@
+<% include partial/header %>
+
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-xs-offset-4 col-xs-4 text-center">
+                    <legend class="text-center">
+                        <%= her.login %></legend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-offset-4 col-xs-6">
+                    <img src="<%=her.avatar%>" class="col-xs-offset-1 col-xs-6" alt="userpicture" title="userpicture" />
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-xs-offset-3 col-xs-6 text-center">
+                    <label class="control-label">
+                        <%= translate.fname %> :</label>
+                    <p>
+                        <%= her.fname %>
+                    </p>
+                    <br/>
+                </div>
+            </div>
+            <legend></legend>
+            <div class="row">
+                <div class="col-xs-offset-3 col-xs-6 text-center">
+                    <label class="control-label">
+                        <%= translate.lname %> :</label>
+                    <p>
+                        <%= her.lname%>
+                    </p>
+                    <br/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6 text-center">
+                <label class="control-label">
+                    <%=translate.movie%>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6 text-center" id="divscroll" style="border: 1px rgb(221, 221, 221) solid; border-radius: 15px; overflow: auto; height: 200px;">
+                <% if (!her.movies) { %>
+                    <p>
+                        <%=translate.rien_vue%>
+                    </p>
+                    <%} else {%>
+                        <% if (user.movies) { %>
+                            <% user.movies.forEach((elem) => { %>
+                                <p class="col-xs-6">
+                                    <%= elem %>
+                            		<legend></legend>
+			                    </p>
+		            <% }) %>
+	            <% } %>
+            <%}%>
+            </div>
+        </div>
+    </div>
+    <% include partial/footer %>
